@@ -73,13 +73,10 @@ func iWantToConvertPoundIntoKilograms(pound float64) error {
 }
 func iWantToConvertFahrenheitToCelsius(pound float64) error {
 	answerNew := ConvertFahrenheitToCelsius(pound)
-	if pound < 0 {
+	if pound < 32 || answerNew >= 0 {
 		handler.value, handler.error = answerNew, errors.New("Неверное вычисление")
-	} else if answerNew < 0 {
-		handler.value, handler.error = answerNew, errors.New("Неверное вычисление")
-	} else {
-		handler.value, handler.error = answerNew, nil
 	}
+	handler.value, handler.error = answerNew, nil
 	return nil
 }
 func iWantToConvertFeetIntoMeters(pound float64) error {

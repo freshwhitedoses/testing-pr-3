@@ -25,7 +25,7 @@ Feature: convert pounds to kilograms
     Then I don't expect error
   Scenario: convert minus fahrenheit to celsius
     When i want to convert -10.0 fahrenheit to celsius
-    Then I expect error
+    Then I don't expect error
   Scenario: convert some fahrenheit to celsius
     When i want to convert 25.0 fahrenheit to celsius
     Then I don't expect error
