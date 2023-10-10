@@ -28,5 +28,15 @@ func ConvertFeetToMeters(feet float64) float64 {
 }
 func ConvertFahrenheitToCelsius(fahrenheit float64) float64 {
 	celsius := (fahrenheit - 32) * 5 / 9
-	return celsius
+	var rounder float64
+	pow := math.Pow(10, float64(3))
+	intermed := celsius * pow
+	_, frac := math.Modf(intermed)
+	if frac >= 0.5 {
+		rounder = math.Ceil(intermed)
+	} else {
+		rounder = math.Floor(intermed)
+	}
+
+	return rounder / pow
 }
