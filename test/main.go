@@ -27,5 +27,6 @@ func ConvertFeetToMeters(feet float64) float64 {
 	return meters
 }
 func ConvertFahrenheitToCelsius(fahrenheit float64) float64 {
-	return 0
+	celsius := (fahrenheit - 32) * 5 / 9
+	return celsius
 }

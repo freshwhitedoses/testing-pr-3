@@ -36,10 +36,10 @@ func TestConvertFahrenheitToCelsiusNull(t *testing.T) {
 	assert.Equal(t, -17.778, mean, "Неверное определение цельсий для нулевого значения")
 }
 func TestConvertFahrenheitToCelsiusSimple(t *testing.T) {
-	mean := ConvertFeetToMeters(112)
+	mean := ConvertFahrenheitToCelsius(112)
 	assert.Equal(t, 44.444, mean, "Неправильное определение цельсий для значения в фаренгейтах")
 }
 func TestTestConvertFahrenheitToCelsiusMinusVar(t *testing.T) {
-	mean := ConvertFeetToMeters(-30)
+	mean := ConvertFahrenheitToCelsius(-30)
 	assert.Equal(t, -34.445, mean, "Неверное определение цельсий для отрицательного значения")
 }
