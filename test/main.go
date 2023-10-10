@@ -21,6 +21,9 @@ func ConvertPoundsToKilograms(pounds float64) float64 {
 }
 func ConvertFeetToMeters(feet float64) float64 {
 	meters := feet * 0.3048
+	if feet < 0 {
+		meters = 0.0
+	}
 	return meters
 }
 func ConvertFahrenheitToCelsius(fahrenheit float64) float64 {
