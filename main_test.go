@@ -1,14 +1,15 @@
-package main
+package testing_pr_3
 
 import (
 	"errors"
 	"flag"
 	_ "flag"
+	"os"
+	"testing"
+
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"
 	"github.com/stretchr/testify/assert"
-	"os"
-	"testing"
 )
 
 type StepsHandler struct {

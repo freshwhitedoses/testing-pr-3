@@ -1,4 +1,4 @@
-package main
+package testing_pr_3
 
 import "math"
 
