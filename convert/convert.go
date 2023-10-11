@@ -1,6 +1,7 @@
 package convert
 
 import (
+	"errors"
 	"math"
 )
 
@@ -43,17 +44,39 @@ func ConvertFahrenheitToCelsius(fahrenheit float64) float64 {
 	return rounder / pow
 }
 
-func TonneToAtomicMass(tonne float64) (result float64, err error) {
+const (
+	AvogadroConstant          = 6.02214076e26
+	KilometerToAngstromFactor = 1e13
+	CelsiusToPlanckFactor     = 1.416808 * (1e32)
+	AbsoluteZeroCelsius       = -273.15
+)
 
-	return tonne * 6.02214076e26, nil
+func TonneToAtomicMass(tonne float64) (float64, error) {
+	if math.IsNaN(tonne) || math.IsInf(tonne, 0) {
+		return 0, errors.New("Input value must be a finite number")
+	}
+	if tonne < 0 {
+		return 0, errors.New("Input value must be non-negative")
+	}
+	return tonne * AvogadroConstant, nil
 }
 
-func KilometerToAngstrom(kilometer float64) (result float64, err error) {
-
-	return kilometer * 1e13, nil
+func KilometerToAngstrom(kilometer float64) (float64, error) {
+	if math.IsNaN(kilometer) || math.IsInf(kilometer, 0) {
+		return 0, errors.New("Input value must be a finite number")
+	}
+	if kilometer < 0 {
+		return 0, errors.New("Input value must be non-negative")
+	}
+	return kilometer * KilometerToAngstromFactor, nil
 }
 
-func CelsiusToPlanck(celsius float64) (result float64, err error) {
-
-	return celsius * 1.416808 * (1e32), nil
+func CelsiusToPlanck(celsius float64) (float64, error) {
+	if math.IsNaN(celsius) || math.IsInf(celsius, 0) {
+		return 0, errors.New("Input value must be a finite number")
+	}
+	if celsius < AbsoluteZeroCelsius {
+		return 0, errors.New("Temperature cannot be below absolute zero")
+	}
+	return celsius * CelsiusToPlanckFactor, nil
 }

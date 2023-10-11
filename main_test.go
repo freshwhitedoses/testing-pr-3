@@ -6,6 +6,7 @@ import (
 	_ "flag"
 	"os"
 	"testing"
+	"testing3/convert"
 
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"
@@ -129,4 +130,79 @@ func TestConvertFahrenheitToCelsiusSimple(t *testing.T) {
 func TestTestConvertFahrenheitToCelsiusMinusVar(t *testing.T) {
 	mean := ConvertFahrenheitToCelsius(-30)
 	assert.Equal(t, -34.445, mean, "Неверное определение цельсий для отрицательного значения")
+}
+
+func TestTonneToAtomicMass(t *testing.T) {
+	tests := []struct {
+		input    float64
+		expected float64
+		err      error
+	}{
+		{1, 6.02214076e26, nil},
+		{0, 0, nil},
+		{-1, 0, errors.New("Input value must be non-negative")},
+	}
+
+	for _, test := range tests {
+		result, err := convert.TonneToAtomicMass(test.input)
+		if err != nil && test.err != nil {
+			if err.Error() != test.err.Error() {
+				t.Errorf("Expected error message '%s', but got '%s'", test.err.Error(), err.Error())
+			}
+		} else {
+			if result != test.expected {
+				t.Errorf("Expected %f, but got %f", test.expected, result)
+			}
+		}
+	}
+}
+
+func TestKilometerToAngstrom(t *testing.T) {
+	tests := []struct {
+		input    float64
+		expected float64
+		err      error
+	}{
+		{1, 1e13, nil},
+		{0, 0, nil},
+		{-1, 0, errors.New("Input value must be non-negative")},
+	}
+
+	for _, test := range tests {
+		result, err := convert.KilometerToAngstrom(test.input)
+		if err != nil && test.err != nil {
+			if err.Error() != test.err.Error() {
+				t.Errorf("Expected error message '%s', but got '%s'", test.err.Error(), err.Error())
+			}
+		} else {
+			if result != test.expected {
+				t.Errorf("Expected %f, but got %f", test.expected, result)
+			}
+		}
+	}
+}
+
+func TestCelsiusToPlanck(t *testing.T) {
+	tests := []struct {
+		input    float64
+		expected float64
+		err      error
+	}{
+		{1, 1.416808e32, nil},
+		{0, 0, nil},
+		{-300, 0, errors.New("Temperature cannot be below absolute zero")},
+	}
+
+	for _, test := range tests {
+		result, err := convert.CelsiusToPlanck(test.input)
+		if err != nil && test.err != nil {
+			if err.Error() != test.err.Error() {
+				t.Errorf("Expected error message '%s', but got '%s'", test.err.Error(), err.Error())
+			}
+		} else {
+			if result != test.expected {
+				t.Errorf("Expected %f, but got %f", test.expected, result)
+			}
+		}
+	}
 }
