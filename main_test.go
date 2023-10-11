@@ -49,6 +49,15 @@ func InitializeScenario(context *godog.ScenarioContext) {
 	context.Step(`^i want to convert (-?\d+\.\d+) fahrenheit to celsius`, iWantToConvertFahrenheitToCelsius)
 	context.Step(`^I don't expect error$`, IDontExpectError)
 	context.Step(`^I expect error$`, IExpectError)
+	context.Step(`^a tonne value of (\d+)$`, aTonneValueOf)
+	context.Step(`^I convert it to atomic mass$`, iConvertItToAtomicMass)
+	context.Step(`^the result should be (\d+(\.\d+)?)$`, theResultShouldBe)
+
+	context.Step(`^a kilometer value of (\d+)$`, aKilometerValueOf)
+	context.Step(`^I convert it to angstrom$`, iConvertItToAngstrom)
+
+	context.Step(`^a celsius value of (\d+)$`, aCelsiusValueOf)
+	context.Step(`^I convert it to planck$`, iConvertItToPlanck)
 }
 func IExpectError() error {
 	if handler.error == nil {
@@ -205,4 +214,44 @@ func TestCelsiusToPlanck(t *testing.T) {
 			}
 		}
 	}
+}
+
+var tonne, kilometer, celsius float64
+var result float64
+
+func aTonneValueOf(arg1 float64) error {
+	tonne = arg1
+	return nil
+}
+
+func iConvertItToAtomicMass() error {
+	result, _ = convert.TonneToAtomicMass(tonne)
+	return nil
+}
+
+func theResultShouldBe(arg1 float64) error {
+	if arg1 != result {
+		return errors.New("RESULT FAILED")
+	}
+	return nil
+}
+
+func aKilometerValueOf(arg1 float64) error {
+	kilometer = arg1
+	return nil
+}
+
+func iConvertItToAngstrom() error {
+	result, _ = convert.KilometerToAngstrom(kilometer)
+	return nil
+}
+
+func aCelsiusValueOf(arg1 float64) error {
+	celsius = arg1
+	return nil
+}
+
+func iConvertItToPlanck() error {
+	result, _ = convert.CelsiusToPlanck(celsius)
+	return nil
 }
