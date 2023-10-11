@@ -45,15 +45,15 @@ func ConvertFahrenheitToCelsius(fahrenheit float64) float64 {
 
 func TonneToAtomicMass(tonne float64) (result float64, err error) {
 
-	return
+	return tonne * 6.02214076e26, nil
 }
 
 func KilometerToAngstrom(kilometer float64) (result float64, err error) {
 
-	return
+	return kilometer * 1e13, nil
 }
 
 func CelsiusToPlanck(celsius float64) (result float64, err error) {
 
-	return
+	return celsius * 1.416808 * (1e32), nil
 }
